@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Artemis Program - NASA</title>
+  <link rel="icon" href="fevicon.webp">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Font: Orbitron for that futuristic vibe -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background-color: #121212;
+      color: #e0e0e0;
+      margin: 0;
+      padding-top: 70px; /* Space for fixed navbar */
+    }
+    
+    /* NAVBAR (VoltVoyage Theme) */
+    .navbar {
+      box-shadow: 0 2px 8px rgba(10, 175, 255, 0.4);
+    }
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+    .nav-link {
+      position: relative;
+      transition: color 0.3s;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      color: #0af;
+    }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: #0af;
+      transition: width 0.3s, left 0.3s;
+    }
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+      left: 0;
+    }
+    .btn-outline-light {
+      border-color: #0af;
+      color: #0af;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .btn-outline-light:hover {
+      background-color: #0af;
+      color: #121212;
+    }
+    
+    /* MOBILE NAVBAR */
+    .mobile-navbar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .mobile-navbar-header .navbar-brand {
+      margin: 0 auto;
+    }
+    .mobile-navbar-header .navbar-toggler,
+    .mobile-navbar-header a {
+      font-size: 1rem;
+    }
+    
+    /* HEADER SECTION with Video Background */
+    #header {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    #header video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      z-index: -1;
+    }
+    /* Overlay for contrast */
+    #header::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 0;
+    }
+    #header .header-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 20px;
+    }
+    #header .header-content img {
+      max-width: 80px;
+      margin-bottom: 20px;
+    }
+    #header .header-content h1 {
+      font-size: 3rem;
+      color: #0af;
+    }
+    #header .header-content p {
+      font-size: 1.2rem;
+    }
+    
+    /* OVERVIEW SECTION */
+    #overview {
+      padding: 60px 0;
+      text-align: center;
+    }
+    #overview h2 {
+      color: #0af;
+      margin-bottom: 20px;
+    }
+    #overview p {
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    /* ARTEMIS II SECTION */
+    #artemis-ii {
+      padding: 60px 0;
+    }
+    .mission-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    .mission-image {
+      flex: 1;
+      min-width: 300px;
+      max-width: 600px;
+    }
+    .mission-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 175, 255, 0.3);
+      transition: transform 0.3s ease;
+    }
+    .mission-image img:hover {
+      transform: scale(1.05);
+    }
+    .mission-content {
+      flex: 1;
+      min-width: 300px;
+      padding: 20px;
+    }
+    .mission-content h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #0af;
+      margin-bottom: 20px;
+    }
+    .mission-content h3 img {
+      width: 40px;
+      height: auto;
+    }
+    .mission-content p {
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+    
+    /* MEET THE CREW SECTION */
+    #meet-crew {
+      padding: 60px 0;
+    }
+    #meet-crew .section-title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #0af;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #meet-crew p.section-description {
+      text-align: center;
+      color: #bbb;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+    #meet-crew .crew-card {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    #meet-crew .crew-card img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 175, 255, 0.3);
+      transition: transform 0.3s ease;
+    }
+    #meet-crew .crew-card img:hover {
+      transform: scale(1.05);
+    }
+    #meet-crew .crew-name {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    #meet-crew .crew-role {
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+    #meet-crew .crew-bio {
+      font-weight: bold;
+      color: #0af;
+      display: inline-flex;
+      align-items: center;
+      margin-top: 5px;
+    }
+    #meet-crew .crew-bio i {
+      margin-left: 5px;
+    }
+    #meet-crew .news-release {
+      text-align: right;
+      font-weight: bold;
+      color: #e0e0e0;
+      margin-bottom: 20px;
+    }
+    #meet-crew .news-release i {
+      color: red;
+    }
+    @media (max-width: 768px) {
+      #meet-crew .news-release {
+        text-align: center;
+        margin-top: 20px;
+      }
+    }
+    
+    /* GALLERY SECTION */
+    #gallery {
+      padding: 60px 0;
+      background: #1a1a1a;
+    }
+    #gallery h2 {
+      color: #0af;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .gallery-grid img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 175, 255, 0.3);
+      transition: transform 0.3s ease;
+    }
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+      .mission-row {
+        flex-direction: column;
+        text-align: center;
+      }
+      .mission-content {
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#desktopNavbar" data-bs-offset="70">
+  
+  <!-- MOBILE NAVBAR -->
+  <nav class="navbar navbar-dark bg-dark fixed-top d-lg-none">
+    <div class="container">
+      <div class="mobile-navbar-header w-100">
+        <!-- Toggler -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu" aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">VOLTVOYAGE</a>
+        <!-- Login Icon -->
+        <a href="login.html" class="text-white text-decoration-none">
+          <i class="fa-solid fa-user-astronaut"></i>
+          <small class="d-block" style="font-size:0.7rem;">Log In</small>
+        </a>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div class="collapse" id="mobileMenu">
+      <div class="bg-dark p-3">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="#header">HOME</a></li>
+          <li class="nav-item"><a class="nav-link" href="#overview">ABOUT</a></li>
+          <li class="nav-item"><a class="nav-link" href="#artemis-ii">ARTEMIS II</a></li>
+          <li class="nav-item"><a class="nav-link" href="#meet-crew">MEET THE CREW</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gallery">GALLERY</a></li>
+        </ul>
+        <form class="d-flex mt-2" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-light" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- DESKTOP NAVBAR -->
+  <nav id="desktopNavbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top d-none d-lg-flex">
+    <div class="container">
+      <!-- Brand -->
+      <a class="navbar-brand" href="#">VOLTVOYAGE</a>
+      <!-- Collapsible Content -->
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#header">HOME</a></li>
+          <li class="nav-item"><a class="nav-link" href="#overview">ABOUT</a></li>
+          <li class="nav-item"><a class="nav-link" href="#artemis-ii">ARTEMIS II</a></li>
+          <li class="nav-item"><a class="nav-link" href="#meet-crew">MEET THE CREW</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gallery">GALLERY</a></li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-light" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+        <a href="login.html" class="text-white text-decoration-none ms-3">
+          <i class="fa-solid fa-user-astronaut"></i>
+          <small class="d-block" style="font-size:0.7rem;">Log In</small>
+        </a>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- HEADER SECTION with Video Background -->
+  <section id="header">
+    <video autoplay loop muted playsinline>
+      <source src="https://www.nasa.gov/wp-content/uploads/2022/11/Artemis-logo-reveal-1080p.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="container text-center header-content">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Artemis-logo-1.png" alt="Artemis Logo">
+      <h1 class="display-4 fw-bold">Artemis Program</h1>
+      <p class="lead">NASA's Next Leap in Lunar Exploration</p>
+      <a href="#overview" class="btn btn-outline-light btn-lg mt-3">
+        <i class="fa-solid fa-angle-down"></i> Learn More
+      </a>
+    </div>
+  </section>
+  
+  <!-- OVERVIEW SECTION -->
+  <section id="overview">
+    <div class="container">
+      <h2>About Artemis</h2>
+      <p>
+        The Artemis program is NASA’s ambitious initiative to return humans to the Moon and establish a sustainable presence there by the end of the decade. Designed to ignite a new era of lunar exploration, Artemis will lay the groundwork for future human missions to Mars and beyond.
+      </p>
+    </div>
+  </section>
+  
+  <!-- ARTEMIS II SECTION -->
+  <section id="artemis-ii">
+    <div class="container">
+      <h2>Artemis II: The Next Step</h2>
+      <div class="mission-row">
+        <!-- Artemis II Poster -->
+        <div class="mission-image">
+          <img src="https://i.pinimg.com/736x/cf/f3/e6/cff3e6ca8f4afd9656f337cea253b352.jpg" alt="Artemis II Poster">
+        </div>
+        <!-- Text Content -->
+        <div class="mission-content">
+          <h3>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Artemis-logo-1.png" alt="Artemis Icon">
+            Artemis II: The Next Step
+          </h3>
+          <p>
+            Artemis II is set to be the first crewed mission of NASA’s Artemis program, sending astronauts on a lunar flyby to test critical systems of the Orion spacecraft in deep space.
+          </p>
+          <p>
+            Serving as a pivotal milestone, Artemis II validates key technologies and paves the way for future lunar landings and exploration – bridging groundbreaking innovation with the next giant leap in human spaceflight.
+          </p>
+          <a href="https://www.nasa.gov/specials/artemis/" target="_blank" class="btn btn-outline-light">
+            <i class="fa-solid fa-rocket"></i> Discover Artemis II
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- MEET THE CREW SECTION -->
+  <section id="meet-crew">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="section-title">Meet the Crew</h2>
+        <a href="#" class="news-release">News Release <i class="fa-solid fa-arrow-up-right"></i></a>
+      </div>
+      <p class="section-description text-muted">
+        These explorers represent the best of humanity, daring to forge new frontiers in space on behalf of all of humanity.
+      </p>
+      <div class="row text-center mt-4">
+        <div class="col-md-3">
+          <div class="crew-card">
+            <img src="https://www.nasa.gov/wp-content/uploads/2023/06/jsc2023e0016434-alt.jpg?resize=768,1024" alt="Reid Wiseman">
+            <p class="crew-name">Reid Wiseman</p>
+            <p class="crew-role">Commander</p>
+            <a href="https://www.nasa.gov/humans-in-space/astronauts/g-reid-wiseman/" class="crew-bio">Bio and More on Reid <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="crew-card">
+            <img src="https://www.nasa.gov/wp-content/uploads/2023/06/jsc2023e0016433-alt.jpg?resize=768,1024" alt="Victor Glover">
+            <p class="crew-name">Victor Glover</p>
+            <p class="crew-role">Pilot</p>
+            <a href="https://www.nasa.gov/humans-in-space/astronauts/victor-j-glover/" class="crew-bio">Bio and More on Victor <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="crew-card">
+            <img src="https://www.nasa.gov/wp-content/uploads/2023/06/jsc2023e0016435-alt.jpg?resize=768,1024" alt="Christina Koch">
+            <p class="crew-name">Christina Koch</p>
+            <p class="crew-role">Mission Specialist</p>
+            <a href="https://www.nasa.gov/people/christina-koch/" class="crew-bio">Bio and More on Christina <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="crew-card">
+            <img src="https://www.nasa.gov/wp-content/uploads/2023/06/jsc2023e0016436-alt.jpg?resize=768,1024" alt="Jeremy Hansen">
+            <p class="crew-name">Jeremy Hansen</p>
+            <p class="crew-role">Mission Specialist</p>
+            <a href="https://www.asc-csa.gc.ca/eng/astronauts/canadian/active/bio-jeremy-hansen.asp" class="crew-bio">Bio and More on Jeremy <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- GALLERY SECTION -->
+  <section id="gallery">
+    <div class="container">
+      <h2>Artemis Gallery</h2>
+      <div class="gallery-grid">
+        <img src="https://www.nasa.gov/wp-content/uploads/2022/09/maf_20220830_ksc_artemis1_epb_005_large.jpg?resize=768,512" alt="Artemis Launch">
+        <img src="https://www.nasa.gov/wp-content/uploads/2022/12/artemis_i_earth_moon_side_by_side.jpg" alt="Artemis Moon">
+        <img src="https://www.nasa.gov/wp-content/uploads/2023/07/49936583636-71a48f318d-k.jpg?resize=768,485" alt="Artemis Crew">
+        <img src="https://www.nasa.gov/wp-content/uploads/2023/05/artemis-basecamp.gif?w=549" alt="Artemis Spacecraft">
+      </div>
+    </div>
+  </section>
+  
+  <!-- Bootstrap Bundle with Popper and Font Awesome JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</body>
+</html>
