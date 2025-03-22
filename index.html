@@ -1,403 +1,158 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>VOLTVOYAGE</title>
-  <link rel="icon" href="fevicon.webp">
-  <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Font for a futuristic vibe -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VOLTVOYAGE - Login</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
-    /* Global Styles */
     body {
-      font-family: 'Orbitron', sans-serif;
-      background-color: #121212;
-      color: #e0e0e0;
-      padding-top: 70px; /* Reserve space for fixed navbar */
+      background: radial-gradient(circle, #1b2735, #090a0f);
+      color: #fff;
+      font-family: Arial, sans-serif;
       margin: 0;
     }
-    
-    /* Common Navbar Styles */
-    .navbar {
-      box-shadow: 0 2px 8px rgba(10, 175, 255, 0.4);
+    /* Navbar */
+    .navbar-custom {
+      background-color: #000;
+      padding: 10px;
     }
     .navbar-brand {
       font-weight: bold;
-      font-size: 1.5rem;
-    }
-    .nav-link {
-      position: relative;
-      transition: color 0.3s;
-    }
-    .nav-link:hover,
-    .nav-link.active {
-      color: #0af;
-    }
-    .nav-link::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: 0;
-      width: 0;
-      height: 2px;
-      background: #0af;
-      transition: width 0.3s, left 0.3s;
-    }
-    .nav-link:hover::after,
-    .nav-link.active::after {
-      width: 100%;
-      left: 0;
-    }
-    .btn-outline-light {
-      border-color: #0af;
-      color: #0af;
-      transition: background-color 0.3s, color 0.3s;
-    }
-    .btn-outline-light:hover {
-      background-color: #0af;
-      color: #121212;
-    }
-    
-    /* --------------------
-       MOBILE NAVBAR (d-lg-none)
-    -------------------- */
-    /* Use a row of 3 columns to align toggler, brand, and login icon */
-    .mobile-navbar-header {
+      font-size: 1.8rem;
+      color: #fff !important;
+      text-transform: uppercase;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+      width: 100%;
+      position: relative;
     }
-    .mobile-navbar-header .navbar-brand {
-      margin: 0 auto;
+    .nav-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
     }
-    /* Optional: reduce padding on small devices */
-    .mobile-navbar-header .navbar-toggler,
-    .mobile-navbar-header a {
-      font-size: 1rem;
+    /* Main container: two columns on desktop */
+    .main-container {
+      min-height: calc(100vh - 56px);
     }
-    
-    /* --------------------
-       DESKTOP NAVBAR (d-none d-lg-flex)
-    -------------------- */
-    .desktop-navbar .navbar-nav .nav-link {
-      margin: 0 0.5rem;
+    /* Banner column (left) */
+    .banner-column {
+      background: url('https://i.pinimg.com/736x/8d/9e/ef/8d9eef01fb36303f2039fc2eebb80e45.jpg') no-repeat center center;
+      background-size: cover;
+      min-height: 90vh;
     }
-    .desktop-navbar .navbar-collapse {
-      justify-content: flex-end;
+    /* Login column (right) */
+    .login-column {
+      display: flex;
+      justify-content: center;
       align-items: center;
+      min-height: 90vh;
+    }
+    .login-card {
+      background: rgba(0, 0, 0, 0.85);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      max-width: 400px;
+      width: 100%;
+    }
+    .login-card h2 {
+      color: #ffbf00;
+      font-weight: bold;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-card h2 i {
+      margin-right: 10px;
+    }
+    .form-control {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: #fff;
+      margin-bottom: 15px;
+      padding: 12px;
+      border-radius: 8px;
+    }
+    .form-control::placeholder {
+      color: #bbb;
+    }
+    .btn-custom {
+      width: 100%;
+      background: linear-gradient(45deg, #00c6ff, #0072ff);
+      border: none;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 5px;
+      padding: 12px;
+      transition: 0.3s;
+    }
+    .btn-custom:hover {
+      background: linear-gradient(45deg, #0072ff, #00c6ff);
+      transform: scale(1.05);
+    }
+    @media (max-width: 767.98px) {
+      /* Hide banner on mobile */
+      .banner-column {
+        display: none;
+      }
     }
   </style>
 </head>
-<body data-bs-spy="scroll" data-bs-target="#desktopNavbar" data-bs-offset="70" tabindex="0">
-  
-  <!-- MOBILE NAVBAR (Visible on screens below 992px) -->
-  <nav class="navbar navbar-dark bg-dark fixed-top d-lg-none">
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-custom">
     <div class="container">
-      <div class="mobile-navbar-header w-100">
-        <!-- Left: Toggler -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu" aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- Center: Brand -->
-        <a class="navbar-brand mx-auto" href="#">VOLTVOYAGE</a>
-        <!-- Right: Login Icon -->
-        <a href="login.html" class="text-white text-decoration-none">
-          <i class="fa-solid fa-user-astronaut"></i>
-          <small class="d-block" style="font-size:0.7rem;">Log In</small>
-        </a>
-      </div>
-    </div>
-    <!-- Collapsible Mobile Menu -->
-    <div class="collapse" id="mobileMenu">
-      <div class="bg-dark p-3">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="#home">HOME</a></li>
-          <li class="nav-item"><a class="nav-link" href="#missions">MISSIONS</a></li>
-          <li class="nav-item"><a class="nav-link" href="#upcoming">UPCOMING</a></li>
-          <li class="nav-item"><a class="nav-link" href="#ongoing">ONGOING MISSIONS</a></li>
-        </ul>
-        <form class="d-flex mt-2" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-light" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </form>
-      </div>
+      <img src="voltvoyage.gif" alt="Nav Icon" class="nav-icon">
+      <a class="navbar-brand mx-auto" href="#">
+        <i class="bi bi-rocket"></i> VOLTVOYAGE
+      </a>
     </div>
   </nav>
   
-  <!-- DESKTOP NAVBAR (Visible on screens 992px and above) -->
-  <nav id="desktopNavbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top d-none d-lg-flex desktop-navbar">
-    <div class="container">
-      <!-- Brand on Left -->
-      <a class="navbar-brand" href="#">VOLTVOYAGE</a>
-      <!-- Collapsible Content -->
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="#home">HOME</a></li>
-          <li class="nav-item"><a class="nav-link" href="#missions">MISSIONS</a></li>
-          <li class="nav-item"><a class="nav-link" href="#upcoming">UPCOMING</a></li>
-          <li class="nav-item"><a class="nav-link" href="#ongoing">ONGOING MISSIONS</a></li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-light" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </form>
-        <div class="ms-3">
-          <a href="login.html" class="text-white text-decoration-none text-center">
-            <i class="fa-solid fa-user-astronaut"></i>
-            <small class="d-block" style="font-size:0.7rem;">Log In</small>
-          </a>
-        </div>
-      </div>
-    </div>
-  </nav>
-  
-<!-- HOME SECTION -->
-<section id="home">
-  <div class="overlay">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <h1 class="display-4 fw-bold">AXIOM 4 MISSION</h1>
-          <a href="https://www.axiomspace.com/missions/ax4#crew" target="_blank" class="btn btn-outline-light btn-lg mt-3">
-            <i class="fa-solid fa-user-astronaut"></i> About Crew
-          </a>
+  <!-- Main Content -->
+  <div class="container-fluid main-container">
+    <div class="row">
+      <!-- Banner Column (visible on md and up) -->
+      <div class="col-md-3 banner-column d-none d-md-block"></div>
+      <!-- Login Column -->
+      <div class="col-12 col-md-9 login-column">
+        <div class="login-card">
+          <h2><i class="bi bi-rocket"></i> SPACE ACCESS</h2>
+          <input type="email" class="form-control" placeholder="Enter your Gmail">
+          <input type="password" class="form-control" placeholder="Enter your Password">
+          <div class="form-check text-start mb-3">
+            <input class="form-check-input" type="checkbox" id="rememberMe">
+            <label class="form-check-label" for="rememberMe">Remember Me</label>
+          </div>
+          <button class="btn btn-custom" onclick="enterSite()">Launch</button>
         </div>
       </div>
     </div>
   </div>
-</section>
-
-<style>
-  /* Home Section Styles */
-  #home {
-    position: relative;
-    min-height: 100vh;
-    padding-top: 80px;
-    background: url('https://pbs.twimg.com/media/GijM0d-WMAAHQCs?format=jpg&name=4096x4096') no-repeat center center/cover;
-    display: flex;
-    align-items: center;
-  }
-
-  /* Overlay for visibility */
-  .overlay {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    color: white;
-    padding-right: 6%;
-  }
-
-  /* Button Styling */
-  .btn-outline-light {
-    border-color: #0af;
-    color: #0af;
-    transition: 0.3s ease-in-out;
-  }
-  .btn-outline-light:hover {
-    background: #0af;
-    color: #121212;
-  }
-</style>
-
- <!-- ========== LATEST SPACE MISSIONS SECTION ========== -->
-<section id="missions" class="py-5">
-  <div class="container">
-    <!-- Section Heading -->
-    <div class="text-center mb-4">
-      <h2 class="section-title">🚀 Latest Space Missions</h2>
-      <p class="text-muted">Track the most recent, ongoing, and upcoming space missions.</p>
-    </div>
-
-    <!-- Filter Tabs -->
-    <ul class="nav nav-pills justify-content-center mb-4" id="missionTabs">
-      <li class="nav-item"><button class="nav-link active" data-category="all">All</button></li>
-      <li class="nav-item"><button class="nav-link" data-category="isro">ISRO</button></li>
-      <li class="nav-item"><button class="nav-link" data-category="nasa">NASA</button></li>
-      <li class="nav-item"><button class="nav-link" data-category="spacex">SpaceX</button></li>
-      <li class="nav-item"><button class="nav-link" data-category="private">Private Missions</button></li>
-    </ul>
-
-    <!-- Missions Grid -->
-    <div class="row g-4 mission-container">
-      <!-- Mission: Aditya-L1 (ISRO) -->
-      <div class="col-md-6 col-lg-4 mission-card" data-category="isro">
-        <div class="mission-panel">
-          <img src="https://imgs.search.brave.com/N4XsFUzvlEpMuAjJ4tsUjYzFrk7nGb4Mle_5AAjR_Ko/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/amFncmFuam9zaC5j/b20vaW1hZ2VzLzIw/MjMvQXVndXN0LzE4/ODIwMjMvd2hhdC1p/cy1hZGl0eWEtbDEt/ZXhwbGFpbmVkLndl/YnA" alt="Aditya-L1">
-          <div class="mission-info">
-            <h3>Aditya-L1</h3>
-            <p>India's first solar observation mission.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mission: Gaganyaan (ISRO) -->
-      <div class="col-md-6 col-lg-4 mission-card" data-category="isro">
-        <div class="mission-panel">
-          <img src="https://imgs.search.brave.com/y4UNLRKI7HRYM2DxtLCKjoiHpimaUuAZVg1iMKw144c/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy82/LzZlL1JlY292ZXJ5/X3RyaWFsX29wZXJh/dGlvbnNfb2ZfdGhl/X0dhZ2FueWFhbl9t/aXNzaW9uX3dpdGhf/Q3Jld19Nb2R1bGVf/TW9ja3VwXyhDTVJN/KV9vbl8yMF9KdWx5/XzIwMjMsX2F0X3Ro/ZV9OYXZhbF9Eb2Nr/eWFyZCxfVmlzYWto/YXBhdG5hbS5fMDMu/d2VicA" alt="Gaganyaan">
-          <div class="mission-info">
-            <h3>Gaganyaan Test Flight</h3>
-            <p>India's first human spaceflight mission.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mission: Polaris Dawn (SpaceX) -->
-      <div class="col-md-6 col-lg-4 mission-card" data-category="spacex">
-        <div class="mission-panel">
-          <img src="https://imgs.search.brave.com/O8JEe78HA_2ZuvQ4Dla-xahUlZg_x3ZePEHgZ0dwtT0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zcGFj/ZWFuZGRlZmVuc2Uu/aW8vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjQvMDkvU3BhY2VY/LVBvbGFyaXMtRGF3/bi1TcGFjZXdhbGsu/anBn" alt="Polaris Dawn">
-          <div class="mission-info">
-            <h3>Polaris Dawn</h3>
-            <p>SpaceX's high-altitude crewed mission.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mission: Artemis II (NASA) -->
-      <div class="col-md-6 col-lg-4 mission-card" data-category="nasa">
-        <div class="mission-panel"> 
-            <a href="artemis.html">   <img src="https://imgs.search.brave.com/7BGHVCBLCNy43J2DzXDOsqaLOY9KHLdzMHbLXiLC-9c/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9kLnNj/aWVuY2V0aW1lcy5j/b20vZW4vZnVsbC80/MzI0MS9uYXNhLXBy/ZXBhcmVzLWFydGVt/aXMtbW9vbi1taXNz/aW9uLWxhdW5jaC5q/cGc_dz04NzUmZj05/NDA3YWQyOGFlNWU5/MTFjZjU1NmExMDc2/ZWJkZTk0Ng" alt="Artemis II"> </a>
-          <div class="mission-info">
-            <h3>Artemis II</h3>
-            <p>NASA's next crewed Moon mission.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mission: Nova-C IM-1 (Private) -->
-      <div class="col-md-6 col-lg-4 mission-card" data-category="private">
-        <div class="mission-panel">
-         <img src="https://imgs.search.brave.com/lziEskmYaFhTSztuDU5Qesf8eytLT_V9GgluX7fjVA8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cmV1dGVycy5jb20v/cmVzaXplci92Mi9P/WkRXSENQSU1KSVJE/Tk9aR1FUV04zVDdS/US5qcGc_YXV0aD00/NmQyZDhjM2NmY2Jh/Y2U5YWY1YzhjMDc4/ODc3MmM4M2RlODNl/ZmU4YWJkMjc1ZjA4/ODM4NWQ1ZDhiNmNm/YjZiJndpZHRoPTEw/ODAmcXVhbGl0eT04/MA" alt="Nova-C IM-1"> 
-          <div class="mission-info">
-            <h3>Nova-C IM-1</h3>
-            <p>Private lunar lander mission.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== STYLES ====== -->
-<style>
-  /* Background */
-  #missions {
-    background: #121212;
-    color: #e0e0e0;
-    padding-top: 60px;
-    padding-bottom: 60px;
-  }
-
-  /* Section Title */
-  .section-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #0af;
-  }
-
-  /* Tabs */
-  .nav-pills .nav-link {
-    background: transparent;
-    color: #bbb;
-    border-radius: 20px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    transition: 0.3s;
-  }
-  .nav-pills .nav-link.active, .nav-pills .nav-link:hover {
-    background: #0af;
-    color: #121212;
-  }
-
-  /* Mission Panels */
-  .mission-panel {
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0, 175, 255, 0.3);
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
-  }
-  .mission-panel img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    transition: transform 0.3s;
-  }
-  .mission-panel:hover img {
-    transform: scale(1.1);
-  }
-  .mission-panel:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 30px rgba(0, 175, 255, 0.5);
-  }
-
-  /* Mission Info */
-  .mission-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 12px;
-    background: rgba(0, 0, 0, 0.6);
-    text-align: center;
-    font-size: 1rem;
-    color: white;
-  }
-</style>
-
-<!-- ====== JAVASCRIPT FOR FILTERING ====== -->
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const tabs = document.querySelectorAll("#missionTabs .nav-link");
-    const missions = document.querySelectorAll(".mission-card");
-
-    tabs.forEach(tab => {
-      tab.addEventListener("click", function () {
-        tabs.forEach(t => t.classList.remove("active"));
-        this.classList.add("active");
-
-        const category = this.getAttribute("data-category");
-
-        missions.forEach(mission => {
-          if (category === "all" || mission.getAttribute("data-category") === category) {
-            mission.style.display = "block";
-          } else {
-            mission.style.display = "none";
-          }
-        });
-      });
-    });
-  });
-</script>
-
   
-  <!-- Font Awesome (For Icons) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-  
-  <section id="upcoming" style="min-height:100vh; padding-top:80px;">
-    <div class="container pt-5">
-      <h1>Upcoming Section</h1>
-      <p>Discover what’s coming next.</p>
-    </div>
-  </section>
-  <section id="ongoing" style="min-height:100vh; padding-top:80px; background:#1a1a1a;">
-    <div class="container pt-5">
-      <h1>Ongoing Missions</h1>
-      <p>See what’s in progress.</p>
-    </div>
-  </section>
-  
-  <!-- Bootstrap Bundle with Popper (No extra jQuery needed) -->
+  <script>
+    function enterSite() {
+      let email = document.querySelector('input[type="email"]').value;
+      let password = document.querySelector('input[type="password"]').value;
+      if (email === "" || password === "") {
+        alert("Please enter your Gmail and Password");
+      } else {
+        document.body.innerHTML = `<div class="container text-center"><h1>Welcome, ${email}</h1><p>Initializing Ghost Mode...</p></div>`;
+        setTimeout(() => { window.location.href = 'nextpage.html'; }, 2000);
+      }
+    }
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
