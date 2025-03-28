@@ -1,158 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VOLTVOYAGE - Login</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VOLTVOYAGE | Login</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- intl-tel-input CSS for phone input -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+  
   <style>
+    /* Animated Gradient Background */
     body {
-      background: radial-gradient(circle, #1b2735, #090a0f);
-      color: #fff;
-      font-family: Arial, sans-serif;
       margin: 0;
-    }
-    /* Navbar */
-    .navbar-custom {
-      background-color: #000;
-      padding: 10px;
-    }
-    .navbar-brand {
-      font-weight: bold;
-      font-size: 1.8rem;
-      color: #fff !important;
-      text-transform: uppercase;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(270deg, #0f2027, #203a43, #2c5364);
+      background-size: 600% 600%;
+      animation: GradientAnimation 16s ease infinite;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 100%;
-      position: relative;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
     }
-    .nav-icon {
-      position: absolute;
-      left: 15px;
-      top: 50%;
-      transform: translateY(-50%);
+    @keyframes GradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Login Card */
+    .login-card {
+      background: #1f1f1f;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.7);
+      width: 400px;
+      padding: 30px 25px;
+      position: relative;
+      overflow: hidden;
+      animation: cardEntrance 0.6s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    @keyframes cardEntrance {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Header with GIF Icon - Replace src with your own GIF URL */
+    .login-header img {
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      object-fit: cover;
+      margin-bottom: 10px;
     }
-    /* Main container: two columns on desktop */
-    .main-container {
-      min-height: calc(100vh - 56px);
+    .login-header h3 {
+      margin: 0;
+      font-weight: 600;
     }
-    /* Banner column (left) */
-    .banner-column {
-      background: url('https://i.pinimg.com/736x/8d/9e/ef/8d9eef01fb36303f2039fc2eebb80e45.jpg') no-repeat center center;
-      background-size: cover;
-      min-height: 90vh;
+    
+    /* Form Groups for Floating Labels */
+    .form-group {
+      position: relative;
+      margin-bottom: 1.8rem;
     }
-    /* Login column (right) */
-    .login-column {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 90vh;
-    }
-    .login-card {
-      background: rgba(0, 0, 0, 0.85);
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-      max-width: 400px;
+    .form-group input {
       width: 100%;
-    }
-    .login-card h2 {
-      color: #ffbf00;
-      font-weight: bold;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .login-card h2 i {
-      margin-right: 10px;
-    }
-    .form-control {
-      background: rgba(255, 255, 255, 0.1);
+      background: none;
       border: none;
+      border-bottom: 1px solid #444;
+      padding: 10px 10px 10px 45px;
       color: #fff;
-      margin-bottom: 15px;
-      padding: 12px;
-      border-radius: 8px;
+      font-size: 15px;
+      transition: border-color 0.3s;
     }
-    .form-control::placeholder {
+    .form-group input:focus {
+      outline: none;
+      border-bottom-color: #0d6efd;
+    }
+    .form-group label {
+      position: absolute;
+      top: 10px;
+      left: 45px;
+      font-size: 15px;
       color: #bbb;
+      pointer-events: none;
+      transition: all 0.2s ease;
     }
-    .btn-custom {
+    .form-group input:focus + label,
+    .form-group input:not(:placeholder-shown) + label {
+      top: -8px;
+      font-size: 12px;
+      color: #0d6efd;
+    }
+    
+    /* Input Icons */
+    .input-icon {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: #0d6efd;
+      transition: transform 0.3s ease;
+    }
+    .form-group input:focus ~ .input-icon {
+      transform: translateY(-50%) scale(1.1);
+    }
+    
+    /* Password Toggle Eye Icon */
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: #0d6efd;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .toggle-password:hover {
+      transform: translateY(-50%) scale(1.1);
+    }
+    
+    /* Toggle Link for Email/Phone */
+    .toggle-link {
+      color: #0d6efd;
+      cursor: pointer;
+      font-size: 14px;
+      text-decoration: none;
+    }
+    .toggle-link:hover {
+      text-decoration: underline;
+    }
+    
+    /* Submit Button */
+    .submit-btn {
       width: 100%;
-      background: linear-gradient(45deg, #00c6ff, #0072ff);
       border: none;
-      color: #fff;
-      font-weight: bold;
       border-radius: 5px;
+      color: #fff;
+      font-size: 16px;
       padding: 12px;
-      transition: 0.3s;
+      background: #0d6efd;
+      transition: background 0.3s ease;
     }
-    .btn-custom:hover {
-      background: linear-gradient(45deg, #0072ff, #00c6ff);
-      transform: scale(1.05);
+    .submit-btn:hover {
+      filter: brightness(1.1);
     }
-    @media (max-width: 767.98px) {
-      /* Hide banner on mobile */
-      .banner-column {
-        display: none;
-      }
+    
+    /* intl-tel-input Overrides */
+    .intl-tel-input {
+      width: 100%;
+    }
+    .intl-tel-input .flag-container,
+    .intl-tel-input .selected-flag,
+    .intl-tel-input .iti__arrow {
+      background: none !important;
+    }
+    .intl-tel-input input {
+      background: none !important;
+      border: none !important;
+      border-bottom: 1px solid #444 !important;
+      color: #fff !important;
+      padding-left: 45px !important;
+    }
+    .iti__country-list {
+      background: #2b2b2b !important;
+      border: 1px solid #444 !important;
+      color: #fff;
+    }
+    .iti__country-list .iti__country:hover,
+    .iti__country-list .iti__country.iti__highlight {
+      background: #0d6efd !important;
+      color: #fff !important;
     }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-custom">
-    <div class="container">
-      <img src="voltvoyage.gif" alt="Nav Icon" class="nav-icon">
-      <a class="navbar-brand mx-auto" href="#">
-        <i class="bi bi-rocket"></i> VOLTVOYAGE
-      </a>
+  <div class="login-card">
+    <div class="login-header text-center mb-3">
+      <!-- Replace the src with your site's GIF icon -->
+      <img src="https://via.placeholder.com/50x50.gif" alt="Site Icon" />
+      <h3>VOLTVOYAGE</h3>
     </div>
-  </nav>
-  
-  <!-- Main Content -->
-  <div class="container-fluid main-container">
-    <div class="row">
-      <!-- Banner Column (visible on md and up) -->
-      <div class="col-md-3 banner-column d-none d-md-block"></div>
-      <!-- Login Column -->
-      <div class="col-12 col-md-9 login-column">
-        <div class="login-card">
-          <h2><i class="bi bi-rocket"></i> SPACE ACCESS</h2>
-          <input type="email" class="form-control" placeholder="Enter your Gmail">
-          <input type="password" class="form-control" placeholder="Enter your Password">
-          <div class="form-check text-start mb-3">
-            <input class="form-check-input" type="checkbox" id="rememberMe">
-            <label class="form-check-label" for="rememberMe">Remember Me</label>
-          </div>
-          <button class="btn btn-custom" onclick="enterSite()">Launch</button>
+    
+    <form id="loginForm">
+      <!-- Email Input (default view) -->
+      <div id="emailFields">
+        <div class="form-group">
+          <input type="email" id="emailInput" placeholder=" " required />
+          <label for="emailInput">Email address</label>
+          <i class="fas fa-envelope input-icon"></i>
         </div>
       </div>
-    </div>
+      
+      <!-- Phone Input (hidden by default) -->
+      <div id="phoneFields" style="display: none;">
+        <div class="form-group">
+          <input type="tel" id="phoneInput" placeholder=" " required />
+          <label for="phoneInput">Phone number</label>
+          <i class="fas fa-phone input-icon"></i>
+        </div>
+      </div>
+      
+      <!-- Password Input with Toggle Eye Icon -->
+      <div class="form-group">
+        <input type="password" id="passwordInput" placeholder=" " required />
+        <label for="passwordInput">Password</label>
+        <i class="fas fa-lock input-icon"></i>
+        <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+      </div>
+      
+      <!-- Toggle Link to Switch Email/Phone -->
+      <div class="text-center mb-3">
+        <span id="toggleText">Use phone instead?</span>
+        <a id="toggleLink" class="toggle-link ms-1">Switch</a>
+      </div>
+      
+      <!-- Submit Button -->
+      <button type="submit" class="submit-btn">
+        <i class="fas fa-arrow-right"></i> &nbsp; Login
+      </button>
+    </form>
   </div>
   
-  <script>
-    function enterSite() {
-      let email = document.querySelector('input[type="email"]').value;
-      let password = document.querySelector('input[type="password"]').value;
-      if (email === "" || password === "") {
-        alert("Please enter your Gmail and Password");
-      } else {
-        document.body.innerHTML = `<div class="container text-center"><h1>Welcome, ${email}</h1><p>Initializing Ghost Mode...</p></div>`;
-        setTimeout(() => { window.location.href = 'nextpage.html'; }, 2000);
-      }
-    }
-  </script>
+  <!-- Scripts: Bootstrap, jQuery, intl-tel-input -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+  
+  <script>
+    $(document).ready(function() {
+      // Initialize intl-tel-input on phone input
+      const phoneInput = document.querySelector('#phoneInput');
+      const iti = window.intlTelInput(phoneInput, {
+        initialCountry: 'in',
+        separateDialCode: false,
+        preferredCountries: ['in', 'us', 'gb'],
+        utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
+      });
+      
+      // Toggle between email and phone fields
+      let usingEmail = true;
+      $('#toggleLink').click(function(e) {
+        e.preventDefault();
+        usingEmail = !usingEmail;
+        if (usingEmail) {
+          $('#emailFields').slideDown(200);
+          $('#phoneFields').slideUp(200);
+          $('#toggleText').text('Use phone instead?');
+        } else {
+          $('#emailFields').slideUp(200);
+          $('#phoneFields').slideDown(200);
+          $('#toggleText').text('Use email instead?');
+        }
+      });
+      
+      // Password toggle functionality
+      $('#togglePassword').click(function() {
+        const passInput = $('#passwordInput');
+        const type = passInput.attr('type') === 'password' ? 'text' : 'password';
+        passInput.attr('type', type);
+        // Change eye icon based on password visibility
+        $(this).toggleClass('fa-eye fa-eye-slash');
+      });
+      
+      // Demo form submission
+      $('#loginForm').submit(function(e) {
+        e.preventDefault();
+        const password = $('#passwordInput').val();
+        if (usingEmail) {
+          const email = $('#emailInput').val();
+          alert(`Email login:\n${email}\nPassword: ${password}`);
+        } else {
+          const phoneNumber = iti.getNumber();
+          alert(`Phone login:\n${phoneNumber}\nPassword: ${password}`);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
