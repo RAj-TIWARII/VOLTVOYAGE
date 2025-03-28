@@ -13,59 +13,71 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
   
   <style>
-    /* Animated Gradient Background */
+    /* Astronomy themed full-page background */
     body {
       margin: 0;
       padding: 0;
       height: 100vh;
-      background: linear-gradient(270deg, #0f2027, #203a43, #2c5364);
-      background-size: 600% 600%;
-      animation: GradientAnimation 16s ease infinite;
+      background: url('https://source.unsplash.com/1600x900/?astronomy,space,stars') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
+    /* Dark overlay for readability */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.65);
+      z-index: 1;
+    }
+    /* Login container positioned on top of the overlay */
+    .login-container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
-      font-family: 'Arial', sans-serif;
+      padding: 20px;
     }
-    @keyframes GradientAnimation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* Login Card */
+    /* Login card with smooth entrance animation */
     .login-card {
       background: #1f1f1f;
       border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.7);
-      width: 400px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.8);
+      max-width: 400px;
+      width: 100%;
       padding: 30px 25px;
-      position: relative;
-      overflow: hidden;
-      animation: cardEntrance 0.6s ease-out forwards;
+      animation: fadeInUp 0.6s ease-out forwards;
       opacity: 0;
       transform: translateY(20px);
     }
-    @keyframes cardEntrance {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
     }
     
-    /* Header with GIF Icon - Replace src with your own GIF URL */
+    /* Header with site icon (replace the src with your GIF icon) */
+    .login-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
     .login-header img {
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       margin-bottom: 10px;
     }
     .login-header h3 {
       margin: 0;
       font-weight: 600;
+      color: #fff;
     }
     
-    /* Form Groups for Floating Labels */
+    /* Form styling with floating labels */
     .form-group {
       position: relative;
       margin-bottom: 1.8rem;
@@ -74,7 +86,7 @@
       width: 100%;
       background: none;
       border: none;
-      border-bottom: 1px solid #444;
+      border-bottom: 1px solid #666;
       padding: 10px 10px 10px 45px;
       color: #fff;
       font-size: 15px;
@@ -82,7 +94,7 @@
     }
     .form-group input:focus {
       outline: none;
-      border-bottom-color: #0d6efd;
+      border-bottom-color: #bbb;
     }
     .form-group label {
       position: absolute;
@@ -97,31 +109,31 @@
     .form-group input:not(:placeholder-shown) + label {
       top: -8px;
       font-size: 12px;
-      color: #0d6efd;
+      color: #bbb;
     }
     
-    /* Input Icons */
+    /* Input icons (neutral gray) */
     .input-icon {
       position: absolute;
       top: 50%;
       left: 10px;
       transform: translateY(-50%);
       font-size: 16px;
-      color: #0d6efd;
+      color: #bbb;
       transition: transform 0.3s ease;
     }
     .form-group input:focus ~ .input-icon {
       transform: translateY(-50%) scale(1.1);
     }
     
-    /* Password Toggle Eye Icon */
+    /* Password toggle eye icon */
     .toggle-password {
       position: absolute;
       top: 50%;
       right: 10px;
       transform: translateY(-50%);
       font-size: 16px;
-      color: #0d6efd;
+      color: #bbb;
       cursor: pointer;
       transition: transform 0.3s ease;
     }
@@ -129,9 +141,9 @@
       transform: translateY(-50%) scale(1.1);
     }
     
-    /* Toggle Link for Email/Phone */
+    /* Toggle link for email/phone */
     .toggle-link {
-      color: #0d6efd;
+      color: #bbb;
       cursor: pointer;
       font-size: 14px;
       text-decoration: none;
@@ -140,7 +152,7 @@
       text-decoration: underline;
     }
     
-    /* Submit Button */
+    /* Submit button styling */
     .submit-btn {
       width: 100%;
       border: none;
@@ -155,87 +167,82 @@
       filter: brightness(1.1);
     }
     
-    /* intl-tel-input Overrides */
-    .intl-tel-input {
-      width: 100%;
-    }
+    /* Hide phone fields by default */
+    #phoneFields { display: none; }
+    
+    /* intl-tel-input overrides for dark theme */
+    .intl-tel-input { width: 100%; }
     .intl-tel-input .flag-container,
     .intl-tel-input .selected-flag,
-    .intl-tel-input .iti__arrow {
-      background: none !important;
-    }
+    .intl-tel-input .iti__arrow { background: none !important; }
     .intl-tel-input input {
       background: none !important;
       border: none !important;
-      border-bottom: 1px solid #444 !important;
+      border-bottom: 1px solid #666 !important;
       color: #fff !important;
       padding-left: 45px !important;
     }
     .iti__country-list {
       background: #2b2b2b !important;
-      border: 1px solid #444 !important;
+      border: 1px solid #666 !important;
       color: #fff;
     }
     .iti__country-list .iti__country:hover,
     .iti__country-list .iti__country.iti__highlight {
-      background: #0d6efd !important;
+      background: #bbb !important;
       color: #fff !important;
     }
   </style>
 </head>
 <body>
-  <div class="login-card">
-    <div class="login-header text-center mb-3">
-      <!-- Replace the src with your site's GIF icon -->
-      <img src="https://via.placeholder.com/50x50.gif" alt="Site Icon" />
-      <h3>VOLTVOYAGE</h3>
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <!-- Replace with your site's GIF icon -->
+        <img src="https://via.placeholder.com/60.gif" alt="Site Icon">
+        <h3>VOLTVOYAGE</h3>
+      </div>
+      <form id="loginForm">
+        <!-- Email Input (default view) -->
+        <div id="emailFields">
+          <div class="form-group">
+            <input type="email" id="emailInput" placeholder=" " required>
+            <label for="emailInput">Email address</label>
+            <i class="fas fa-envelope input-icon"></i>
+          </div>
+        </div>
+        <!-- Phone Input (hidden by default) -->
+        <div id="phoneFields">
+          <div class="form-group">
+            <input type="tel" id="phoneInput" placeholder=" " required>
+            <label for="phoneInput">Phone number</label>
+            <i class="fas fa-phone input-icon"></i>
+          </div>
+        </div>
+        <!-- Password Input with Toggle -->
+        <div class="form-group">
+          <input type="password" id="passwordInput" placeholder=" " required>
+          <label for="passwordInput">Password</label>
+          <i class="fas fa-lock input-icon"></i>
+          <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+        </div>
+        <!-- Toggle link for switching email/phone -->
+        <div class="text-center mb-3">
+          <span id="toggleText">Use phone instead?</span>
+          <a id="toggleLink" class="toggle-link ms-1">Switch</a>
+        </div>
+        <!-- Submit Button -->
+        <button type="submit" class="submit-btn">
+          <i class="fas fa-arrow-right"></i> Login
+        </button>
+      </form>
     </div>
-    
-    <form id="loginForm">
-      <!-- Email Input (default view) -->
-      <div id="emailFields">
-        <div class="form-group">
-          <input type="email" id="emailInput" placeholder=" " required />
-          <label for="emailInput">Email address</label>
-          <i class="fas fa-envelope input-icon"></i>
-        </div>
-      </div>
-      
-      <!-- Phone Input (hidden by default) -->
-      <div id="phoneFields" style="display: none;">
-        <div class="form-group">
-          <input type="tel" id="phoneInput" placeholder=" " required />
-          <label for="phoneInput">Phone number</label>
-          <i class="fas fa-phone input-icon"></i>
-        </div>
-      </div>
-      
-      <!-- Password Input with Toggle Eye Icon -->
-      <div class="form-group">
-        <input type="password" id="passwordInput" placeholder=" " required />
-        <label for="passwordInput">Password</label>
-        <i class="fas fa-lock input-icon"></i>
-        <i class="fas fa-eye toggle-password" id="togglePassword"></i>
-      </div>
-      
-      <!-- Toggle Link to Switch Email/Phone -->
-      <div class="text-center mb-3">
-        <span id="toggleText">Use phone instead?</span>
-        <a id="toggleLink" class="toggle-link ms-1">Switch</a>
-      </div>
-      
-      <!-- Submit Button -->
-      <button type="submit" class="submit-btn">
-        <i class="fas fa-arrow-right"></i> &nbsp; Login
-      </button>
-    </form>
   </div>
   
-  <!-- Scripts: Bootstrap, jQuery, intl-tel-input -->
+  <!-- Bootstrap Bundle, jQuery, intl-tel-input -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
-  
   <script>
     $(document).ready(function() {
       // Initialize intl-tel-input on phone input
@@ -252,7 +259,7 @@
       $('#toggleLink').click(function(e) {
         e.preventDefault();
         usingEmail = !usingEmail;
-        if (usingEmail) {
+        if(usingEmail) {
           $('#emailFields').slideDown(200);
           $('#phoneFields').slideUp(200);
           $('#toggleText').text('Use phone instead?');
@@ -263,12 +270,11 @@
         }
       });
       
-      // Password toggle functionality
+      // Toggle password visibility
       $('#togglePassword').click(function() {
         const passInput = $('#passwordInput');
         const type = passInput.attr('type') === 'password' ? 'text' : 'password';
         passInput.attr('type', type);
-        // Change eye icon based on password visibility
         $(this).toggleClass('fa-eye fa-eye-slash');
       });
       
@@ -276,7 +282,7 @@
       $('#loginForm').submit(function(e) {
         e.preventDefault();
         const password = $('#passwordInput').val();
-        if (usingEmail) {
+        if(usingEmail) {
           const email = $('#emailInput').val();
           alert(`Email login:\n${email}\nPassword: ${password}`);
         } else {
