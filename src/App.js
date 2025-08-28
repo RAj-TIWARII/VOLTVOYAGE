@@ -244,7 +244,7 @@ const VoltVoyage = () => {
             <ul className={`dropdown ${activeDropdowns.missions ? 'active' : ''}`}>
               <li className="dropdown-item">
                 <a href="chandryaan.html" className="dropdown-link">
-                  Chandryaan <span style={{color: 'rgba(255, 255, 255, 0.479)'}}>(MOON)</span>
+                  Chandryaan <span style={{color: 'rgba(255, 255, 255, 0.479)'}}>(MOONN)</span>
                 </a>
               </li>
               <li className="dropdown-item">
