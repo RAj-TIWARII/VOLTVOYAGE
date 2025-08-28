@@ -44,10 +44,11 @@ const VoltVoyage = () => {
     'About': { type: 'Page', href: '#about' }
   };
 
-  // Create stars
+  // Create enhanced stars with more variety and density
   const createStars = () => {
     const stars = [];
-    for (let i = 0; i < 100; i++) {
+    // Increased number of stars for better coverage
+    for (let i = 0; i < 300; i++) {
       stars.push(
         <div
           key={i}
@@ -55,7 +56,8 @@ const VoltVoyage = () => {
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 3}s`
+            animationDelay: `${Math.random() * 6}s`,
+            animationDuration: `${3 + Math.random() * 4}s`
           }}
         />
       );
@@ -205,7 +207,7 @@ const VoltVoyage = () => {
 
   return (
     <div className="app">
-      {/* Stars Background */}
+      {/* Enhanced Stars Background */}
       <div className="stars" id="stars">
         {createStars()}
       </div>
@@ -244,7 +246,7 @@ const VoltVoyage = () => {
             <ul className={`dropdown ${activeDropdowns.missions ? 'active' : ''}`}>
               <li className="dropdown-item">
                 <a href="chandryaan.html" className="dropdown-link">
-                  Chandryaan <span style={{color: 'rgba(255, 255, 255, 0.479)'}}>(MOONN)</span>
+                  Chandryaan <span style={{color: 'rgba(255, 255, 255, 0.479)'}}>(MOON)</span>
                 </a>
               </li>
               <li className="dropdown-item">
