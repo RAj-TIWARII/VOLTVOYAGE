@@ -414,7 +414,7 @@ const VoltVoyage = () => {
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <div className="hero-text">TRACKING INDIAN SPACE FLIGHT</div>
-          <p className="hero-subtitle">Explore the cosmos with cutting-edge technology and groundbreaking missions</p>
+          <p className="hero-subtitle"></p>
 <br></br>
           <p>🚧 Platform is under maintenance—launching soon. 🚧</p>
         </div>
