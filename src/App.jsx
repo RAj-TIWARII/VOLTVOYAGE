@@ -245,17 +245,17 @@ const VoltVoyage = () => {
             </a>
             <ul className={`dropdown ${activeDropdowns.missions ? 'active' : ''}`}>
               <li className="dropdown-item">
-                <a href="chandryaan.html" className="dropdown-link">
+                <a href="chandryaan" className="dropdown-link">
                   Chandryaan <span style={{color: 'rgba(255, 255, 255, 0.479)'}}>(MOON)</span>
                 </a>
               </li>
               <li className="dropdown-item">
-                <a href="mangalyaan.html" className="dropdown-link">
+                <a href="mangalyaan" className="dropdown-link">
                   Mangalyaan <span style={{color: 'rgba(255, 255, 255, 0.479)'}}>(MARS)</span>
                 </a>
               </li>
               <li className="dropdown-item">
-                <a href="gaganyaan.html" className="dropdown-link">
+                <a href="gaganyaan" className="dropdown-link">
                   Gaganyaan <span style={{color: 'rgba(255, 255, 255, 0.479)'}}>(CREW)</span>
                 </a>
               </li>
@@ -265,7 +265,7 @@ const VoltVoyage = () => {
                 </a>
               </li>
               <li className="dropdown-item">
-                <a href="rlv.html" className="dropdown-link">RLV-LEX</a>
+                <a href="rlv" className="dropdown-link">RLV-LEX</a>
               </li>
             </ul>
           </li>
