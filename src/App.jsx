@@ -415,7 +415,7 @@ const VoltVoyage = () => {
         <div className="hero-content">
           <div className="hero-text">TRACKING INDIAN SPACE FLIGHT</div>
           <p className="hero-subtitle">Explore the cosmos with cutting-edge technology and groundbreaking missions</p>
-
+<br></br>
           <p>🚧 Platform is under maintenance—launching soon. 🚧</p>
         </div>
         <div className="scroll-indicator" onClick={() => scrollToSection('recent-sections')}>
